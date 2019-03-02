@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+
+class Signin extends Component {
+render() {
+    return (
+        <div>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500" rel="stylesheet" type="text/css" />
+          <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet" type="text/css" />
+          <link href="../styles/global.css" rel="stylesheet" />
+          <title>Courses</title>
+          <div id="root">
+            <div>
+              <div className="header">
+                <div className="bounds">
+                  <h1 className="header--logo">Courses</h1>
+                  <nav><a className="signup" href="sign-up">Sign Up</a><a className="signin" href="sign-in.html">Sign In</a></nav>
+                </div>
+              </div>
+              <hr />
+              <div className="bounds">
+                <div className="grid-33 centered signin">
+                  <h1>Sign In</h1>
+                  <div>
+                    <form>
+                      <div><input id="emailAddress" name="emailAddress" type="text" className placeholder="Email Address" defaultValue /></div>
+                      <div><input id="password" name="password" type="password" className placeholder="Password" defaultValue /></div>
+                      <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign In</button><button className="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button></div>
+                    </form>
+                  </div>
+                  <p>&nbsp;</p>
+                  <p>Don't have a user account? <a href="sign-up">Click here</a> to sign up!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+}
+
+export default Signin;
