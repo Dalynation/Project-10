@@ -7,9 +7,9 @@ var jsonParser = require("body-parser").json;
 var routes = require("./routes");
 var mongoose = require("mongoose");
 var app = express();
-var cors = reqiure("cors"); //
+var cors = require("cors"); //
 
-app.use(cors()); //
+app.use(cors); //
 
 
 

@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class Courses extends Component {
+
     render () {
+      
+      axios({	
+        method:'get',
+        url: "http://localhost:5000/api/courses", 
+    }).then(function(response){
+        console.log(response.data);
+    })
+
         return (
           <div>
         <meta charSet="utf-8" />
