@@ -9,7 +9,7 @@ var mongoose = require("mongoose");
 var app = express();
 var cors = require("cors"); //
 
-app.use(cors); //
+app.use(cors()); //
 
 
 

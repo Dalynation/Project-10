@@ -138,13 +138,6 @@ router.post("/api/users", (req, res, next) => {
 //________________________________________________________________________
 
 
-
-
-
-
-
-
-
 // Returns a list of courses (including the user that owns each course)
 router.get("/api/courses", function(req, res, next){
     Course.find()
@@ -153,12 +146,13 @@ router.get("/api/courses", function(req, res, next){
     .then(
         (data) => {
             console.log(JSON.stringify(data, null, 2));
-            res.status(200).json(data);
+            res.status(200)
+            return res.send(data)
         });
 });
 
 // GET /courses/:id
-// Route for specific user
+// Route for specific course
 router.get("/api/courses/:cID", function(req, res, next){
    const {cID} = req.params;
     Course.findById(cID) // the course will be searched with its unique ID
