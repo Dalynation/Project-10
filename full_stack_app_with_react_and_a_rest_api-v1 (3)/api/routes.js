@@ -153,15 +153,15 @@ router.get("/api/courses", function(req, res, next){
 
 // GET /courses/:id
 // Route for specific course
-router.get("/api/courses/:cID", function(req, res, next){
-   const {cID} = req.params;
-    Course.findById(cID) // the course will be searched with its unique ID
+router.get("/api/courses/:id", function(req, res, next){
+   const {id} = req.params;
+    Course.findById(id) // the course will be searched with its unique ID
     .populate('user')
     .exec()
     .then((data) => {
         console.log(JSON.stringify(data, null, 2));
         res.status(200).json(data);
-        res.location = 'api/courses/cID'
+        res.location = 'api/courses/id'
     });
    
 });

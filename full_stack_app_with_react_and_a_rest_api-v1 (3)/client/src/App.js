@@ -10,6 +10,7 @@ import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import CourseDetail from "./components/CourseDetail";
 import CreateCourse from "./components/CreateCourse";
+import axios from 'axios';
 
  
   
@@ -26,7 +27,7 @@ class App extends Component {
             <Route exact path = "/" component={Courses} />
             <Route exact path = "/sign-up" component={Signup} />
             <Route exact path = "/sign-in" component={Signin} />
-            <Route exact path = "/course-detail/:id" component={CourseDetail} />
+            <Route exact path = "/courses/:id" component={CourseDetail} />
             <Route exact path = "/create-course" component={CreateCourse} />
           </Switch>
         </div>

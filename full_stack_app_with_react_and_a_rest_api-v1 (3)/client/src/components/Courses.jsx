@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom'
 import axios from "axios";
 
 class Courses extends Component {
-
-  state = {
-      course:[],
+constructor(props) {
+ super(props) 
+  this.state = {
+      courses:[], //
     //  loading: true
   }
-
+}
       componentDidMount() {
         axios.get('http://localhost:5000/api/courses')
           .then(res =>  {
-            const data = res.data;
-            console.log(data);
+            const course = res.data; //
+            
             this.setState({
-              course: data
+              courses: course
             })
+            console.log(res.data);
             // this.setState({course: data})
             // console.log({title: course.title});
           })
@@ -29,7 +32,7 @@ class Courses extends Component {
 
     render () {
 
-     
+      //
         return (
           <div>
         <title>Courses</title>
@@ -43,17 +46,14 @@ class Courses extends Component {
             </div>
             <hr />
             <div className="bounds">
-              
-                  
-                 
                   {
-                    this.state.course.map(data => (
-                      <div key={data._id}>
-                      <div className="grid-33"><a className="course--module course--link" href="course-detail/${cID}">
+                    this.state.courses.map(course => (
+                      <div key={course._id}>
+                      <div className="grid-33"><NavLink to= {`courses/${course._id}`} className="course--module course--link" >  
                       <h4 className="course--label">Course</h4>
-                        <h3 className="course--title">{data.title}</h3>
+                        <h3 className="course--title">{course.title}</h3>
                       
-                      </a></div>
+                      </NavLink></div>
                       </div>
                   ))
                 }
@@ -70,11 +70,5 @@ class Courses extends Component {
     }
   }
 
-  //   axios({	
-//     method:'get',
-//     url: "http://localhost:5000/api/courses", 
-// }).then(function(response){
-//     console.log(response.data);
-// })
 
 export default Courses;
