@@ -168,7 +168,7 @@ router.get("/api/courses/:id", function(req, res, next){
 
 //POST /users
 // Route for creating courses
-router.post("/api/courses", authenticateUser, function(req, res, next){
+router.post("/api/courses", /*authenticateUser,*/ function(req, res, next){
 
 const user = req.currentUser;
     var course = new Course({
