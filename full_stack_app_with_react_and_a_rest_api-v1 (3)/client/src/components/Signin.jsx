@@ -44,25 +44,30 @@ class Signin extends Component {
 
     onChange(text){
       this.setState({[text.target.name]: text.target.value})
-      console.log(this.state);
+     // console.log(this.state);
     }
 
 
-  //   componentDidMount(){
-  //   axios({	
-  //     method:'GET',
-  //     url: "http://localhost:5000/api/users", 
-  //     auth:
-  //         {
-  //             emailAddress: `${username}`,
-  //             password: `${password}`
-  //         }
-  //     })  
-  //     .then(function(response){
-  //     console.log(response.data);
-  //     alert("Welcome " + response.data.firstName)
-  //     })
-  // }
+    componentDidMount(){
+    
+  }
+
+  getUser = (body) => {
+  axios({	
+    method:'GET',
+    url: "http://localhost:5000/api/users", 
+    auth:
+        {
+            emailAddress: `${this.state.emailAddress}`,
+            password: `${this.state.password}`
+        }
+    })  
+    .then(function(response){
+      console.log(response.data);
+      alert("Welcome " + response.data.firstName)
+    })
+  }
+
 render() {
     return (
         <div>
@@ -81,9 +86,9 @@ render() {
                   <h1>Sign In</h1>
                   <div>
                     {/* <form> */}
-                      <div><input id="emailAddress" name="emailAddress" type="text" className placeholder="Email Address" onChange = {this.onChange} /></div>
-                      <div><input id="password" name="password" type="password" className placeholder="Password" onChange = {this.onChange} /></div>
-                      <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick={this.login} >Sign In</button><button className="button button-secondary" >Cancel</button></div>
+                      <div><input id="emailAddress" name="emailAddress" type="text"  placeholder="Email Address" onChange = {this.onChange} /></div>
+                      <div><input id="password" name="password" type="password"  placeholder="Password" onChange = {this.onChange} /></div>
+                      <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick={this.getUser} >Sign In</button><button className="button button-secondary" >Cancel</button></div>
                     {/* </form> */}
                   </div>
                   <p>&nbsp;</p>
