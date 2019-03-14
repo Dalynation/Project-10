@@ -11,64 +11,72 @@ class Signin extends Component {
         password:'',
         user:[]
       }
-      this.login = this.login.bind(this);
+      //this.login = this.login.bind(this);
       this.onChange = this.onChange.bind(this);
     }
-
-    login(){
-      let obj ={}
-      
-      obj.emailAddress = this.state.emailAddress;
-      obj.password = this.state.password
-
-      fetch('http://localhost:5000/api/users',
-     {
-       header: {
-         "Content-type": "application/json"
-       },
-       method: 'GET',
-      // body:JSON.stringify({obj})
-     }
-     
-      )
-      .then(res =>  {
-        const user = res.data;
-        console.log(res.data);
-            alert("Welcome " ) // + this.user.firstName
-      }) 
-      // .then(function(response){
-      //       console.log(res.data);
-      //       alert("Welcome " + res.user.firstName)
-      //       })
-     }
 
     onChange(text){
       this.setState({[text.target.name]: text.target.value})
      // console.log(this.state);
     }
+  //   login(){
+  //     let obj ={}
+      
+  //     obj.emailAddress = this.state.emailAddress;
+  //     obj.password = this.state.password
+
+  //     fetch('http://localhost:5000/api/users',
+  //    {
+  //      header: {
+  //        "Content-type": "application/json"
+  //      },
+  //      method: 'GET',
+  //     // body:JSON.stringify({obj})
+  //    }
+     
+  //     )
+  //     .then(res =>  {
+  //       const user = res.data;
+  //       console.log(res.data);
+  //           alert("Welcome " ) // + this.user.firstName
+  //     }) 
+  //     // .then(function(response){
+  //     //       console.log(res.data);
+  //     //       alert("Welcome " + res.user.firstName)
+  //     //       })
+  //    }
+
+    // onChange(text){
+    //   this.setState({[text.target.name]: text.target.value})
+    //  // console.log(this.state);
+    // }
 
 
-    componentDidMount(){
+  //   componentDidMount(){
     
-  }
-
-  getUser = (body) => {
-  axios({	
-    method:'GET',
-    url: "http://localhost:5000/api/users", 
-    auth:
-        {
-            emailAddress: `${this.state.emailAddress}`,
-            password: `${this.state.password}`
-        }
-    })  
-    .then(function(response){
-      console.log(response.data);
-      alert("Welcome " + response.data.firstName)
-    })
-  }
+  // }
+    getthatUser () {
+      this.props.getUserText();
+    }
+  // getUser = (body) => {
+  // axios({	
+  //   method:'GET',
+  //   url: "http://localhost:5000/api/users", 
+  //   auth:
+  //       {
+  //           username: `${this.state.emailAddress}`,
+  //           password: `${this.state.password}`
+  //       }
+  //   })  
+  //   .then(function(response){
+  //     const user = response.data;
+  //     console.log(user);
+  //     alert("Welcome " + response.data[0].firstName)
+  //   })
+  // }
 
 render() {
+  console.log()
     return (
         <div>
           <title>Courses</title>
@@ -88,7 +96,7 @@ render() {
                     {/* <form> */}
                       <div><input id="emailAddress" name="emailAddress" type="text"  placeholder="Email Address" onChange = {this.onChange} /></div>
                       <div><input id="password" name="password" type="password"  placeholder="Password" onChange = {this.onChange} /></div>
-                      <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick={this.getUser} >Sign In</button><button className="button button-secondary" >Cancel</button></div>
+                      <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick={this.getthatUser} >Sign In</button><button className="button button-secondary" >Cancel</button></div>
                     {/* </form> */}
                   </div>
                   <p>&nbsp;</p>
