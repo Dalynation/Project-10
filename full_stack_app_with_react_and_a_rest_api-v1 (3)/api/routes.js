@@ -108,11 +108,11 @@ router.post("/api/users", (req, res, next) => {
                 message: "This email already exists"
             });
         } else {
-            bcrypt.hash(req.body.password, 10, (err, hash) => { // the password is hashed upon creation
-                if (err) {
-                    return next(err) && res.status(401)
-                    
-                } else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => { // the password is hashed upon creation
+                    if (err) {
+                        return next(err) && res.status(401)
+                        
+                    } else {
                     
                     var user = new User({ // once user is created then these structure/parameters will be required
                         firstName:req.body.firstName,
@@ -166,9 +166,9 @@ router.get("/api/courses/:id", function(req, res, next){
    
 });
 
-//POST /users
+//POST /courses
 // Route for creating courses
-router.post("/api/courses", /*authenticateUser,*/ function(req, res, next){
+router.post("/api/courses", authenticateUser, function(req, res, next){
 
 const user = req.currentUser;
     var course = new Course({

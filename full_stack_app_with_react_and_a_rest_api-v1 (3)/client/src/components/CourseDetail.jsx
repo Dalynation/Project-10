@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
+import Header from "./Header";
 import axios from "axios";
 
 class CourseDetail extends Component {
@@ -8,6 +10,7 @@ class CourseDetail extends Component {
         course: [], //
         user:[] //
         }
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
  componentDidMount() {
@@ -20,23 +23,42 @@ const cID= this.props.match.params.id; //
             course :courseInfo, //
             user: courseInfo.user //
         })
-    });
+    })
+    
 }
 
+handleDelete() {
+  const localusername = localStorage.getItem('username')
+  const localpassword = localStorage.getItem('password')
+  
+  const cID= this.props.match.params.id;
+  axios({
+    method:'DELETE',
+    url:`http://localhost:5000/api/courses/${cID}`,
+    auth:
+              {
+                  username: `${localusername}`,
+                  password: `${localpassword}`,
+              }
+  })
+  .then(window.location = "/" )
+}
   
   render () {
     
      console.log(this.state.course)
      console.log(this.state.user)
      //
+     const cID= this.props.match.params.id;
      const courseData = this.state.course;
      const userData = this.state.user;
     //
         return (
                   <div>
+                    <Header/>
                     <div className="actions--bar">
                       <div className="bounds">
-                        <div className="grid-100"><span><a className="button" href="update-course.html">Update Course</a><a className="button" href="#">Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
+                        <div className="grid-100"><span><a href={`/courses/${cID}/update`} className="button" >Update Course</a><a className="button" onClick={this.handleDelete}>Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
                       </div>
                     </div>
                    

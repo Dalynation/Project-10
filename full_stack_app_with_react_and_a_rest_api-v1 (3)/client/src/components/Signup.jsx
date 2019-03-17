@@ -1,15 +1,67 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
+import axios from "axios";
+
 
 class Signup extends Component {
+
+constructor(props) {
+  super(props)
+  this.state = {
+    firstName:'',
+    lastName:'',
+    emailAddress:'',
+    password:'',
+    confirmPassword:''
+  }
+
+  this.onChange = this.onChange.bind(this);
+
+}
+
+
+onChange (text) {
+  this.setState({ 
+    [text.target.name]: text.target.value
+   
+  });
+  console.log(JSON.stringify(text.target.password))
+  
+}
+
+handlesignup = (text) => {
+
+let body = {
+"firstName":this.state.firstName,
+"lastName":this.state.lastName,
+"emailAddress":this.state.emailAddress,
+"password":this.state.password,
+"confirmpassword":this.state.ConfirmPassword
+}
+   const password = this.state.password
+  const confirmpassword = this.state.ConfirmPassword
+
+ if (password === confirmpassword) {
+  axios({	
+          method:'POST',
+          url: "http://localhost:5000/api/users", 
+          data: body 
+  }).catch()
+  .then(function(response){
+    //debugger;
+    const user = response.data;
+    console.log(user);
+  })
+ } else {
+   alert("Passwords do not match.")
+ }
+}
+
+
+
 render () {
     return (
-<div>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet" type="text/css" />
-        <link href="../styles/global.css" rel="stylesheet" />
+  <div>
         <title>Courses</title>
         <div id="root">
           <div>
@@ -24,17 +76,17 @@ render () {
               <div className="grid-33 centered signin">
                 <h1>Sign Up</h1>
                 <div>
-                  <form>
-                    <div><input id="firstName" name="firstName" type="text" className placeholder="First Name" defaultValue /></div>
-                    <div><input id="lastName" name="lastName" type="text" className placeholder="Last Name" defaultValue /></div>
-                    <div><input id="emailAddress" name="emailAddress" type="text" className placeholder="Email Address" defaultValue /></div>
-                    <div><input id="password" name="password" type="password" className placeholder="Password" defaultValue /></div>
-                    <div><input id="confirmPassword" name="confirmPassword" type="password" className placeholder="Confirm Password" defaultValue /></div>
-                    <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign Up</button><button className="button button-secondary" onclick="event.preventDefault(); location.href='/';">Cancel</button></div>
-                  </form>
+                  {/* <form> */}
+                    <div><input id="firstName" name="firstName" type="text" placeholder="First Name" onChange = {this.onChange} /></div>
+                    <div><input id="lastName" name="lastName" type="text" placeholder="Last Name" onChange = {this.onChange}  /></div>
+                    <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" onChange = {this.onChange}  /></div>
+                    <div><input id="password" name="password" type="password" placeholder="Password" onChange = {this.onChange} /></div>
+                    <div><input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password" onChange = {this.onChange}  /></div>
+                    <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick={this.handlesignup}>Sign Up</button><NavLink to="signin"><button className="button button-secondary" >Cancel</button></NavLink></div>
+                  {/* </form> */}
                 </div>
                 <p>&nbsp;</p>
-                <p>Already have a user account? <a href="sign-in.html">Click here</a> to sign in!</p>
+                <p>Already have a user account? <a href="signin">Click here</a> to sign in!</p>
               </div>
             </div>
           </div>

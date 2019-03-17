@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom'
 import axios from "axios";
+import Header from "./Header";
 
 class Courses extends Component {
 constructor(props) {
  super(props) 
   this.state = {
       courses:[], //
+      user:[]
     //  loading: true
   }
 }
@@ -16,9 +18,24 @@ constructor(props) {
             const course = res.data; //
             
             this.setState({
-              courses: course
+              courses: course,
+              user: course.user
             })
-            console.log(res.data);
+            for (var i = 0; i<course.length; i++){
+              var userid = course[i].user
+              //console.log(userid)
+      
+              
+              // if (userid === localStorage.user._id) {
+                
+              // } else {
+
+              // }
+              
+              }
+              const localData = JSON.parse(localStorage.getItem('user'))
+              //console.log(course)
+              //console.log(localData[0].password)
             // this.setState({course: data})
             // console.log({title: course.title});
           })
@@ -31,21 +48,13 @@ constructor(props) {
 
 
     render () {
+ 
 
-      //
         return (
           <div>
-        <title>Courses</title>
-        <div id="root">
-          <div>
-            <div className="header">
-              <div className="bounds">
-                <h1 className="header--logo">Courses</h1>
-                <nav><a className="signup" href="sign-up">Sign Up</a><a className="signin" href="sign-in">Sign In</a></nav>
-              </div>
-            </div>
-            <hr />
+          <Header/>
             <div className="bounds">
+            
                   {
                     this.state.courses.map(course => (
                       <div key={course._id}>
@@ -63,9 +72,7 @@ constructor(props) {
                     </svg>New Course</h3>
                 </a></div>
             </div>
-          </div>
-        </div>
-      </div>
+            </div>
         );
     }
   }
