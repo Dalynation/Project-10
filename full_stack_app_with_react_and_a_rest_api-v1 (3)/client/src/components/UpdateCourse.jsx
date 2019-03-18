@@ -5,6 +5,8 @@ import axios from "axios";
 
 
 class UpdateCourse extends Component {
+
+  //
   constructor(props) {
     super(props) 
      this.state = {
@@ -13,8 +15,8 @@ class UpdateCourse extends Component {
     }
 }
 
+//
 componentDidMount() {
-//  const {match: {params} } = this.props
 const cID= this.props.match.params.id; //
 axios.get(`http://localhost:5000/api/courses/${cID}`) //
 .then(res => {
@@ -26,12 +28,19 @@ axios.get(`http://localhost:5000/api/courses/${cID}`) //
 }
 //--------------------------------------------------------------
 
+//
 handleChange = event => {
   this.setState({ [event.target.name]: event.target.value});
 }
 
+//
 handleSubmit = event => {
-  //event.preventDefualt();
+  if(this.state.title && this.state.description <= 1 ){//
+     event.preventDefualt();
+    alert ("Please do not update course without a title or description.")
+} else {//
+ 
+  
   const localusername = localStorage.getItem('username')
   const localpassword = localStorage.getItem('password')
 
@@ -55,12 +64,15 @@ axios({
 .then( res => {console.log(res.data)
   window.location.href=`/courses/${cID}`
   })
+}
 
 }
   render () {
     const cID= this.props.match.params.id;
     const courseData = this.state.course;
     console.log(courseData)
+
+    
 return (
     <div>
       <Header/>

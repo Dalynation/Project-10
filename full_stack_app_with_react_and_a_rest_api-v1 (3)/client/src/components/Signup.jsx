@@ -5,6 +5,7 @@ import axios from "axios";
 
 class Signup extends Component {
 
+  //
 constructor(props) {
   super(props)
   this.state = {
@@ -19,7 +20,7 @@ constructor(props) {
 
 }
 
-
+//
 onChange = (text) => {
   this.setState({ 
     [text.target.name]: text.target.value
@@ -29,8 +30,13 @@ onChange = (text) => {
   
 }
 
+//
 handlesignup = (e) => {
-if (this.state.password === this.state.confirmPassword) {
+  
+if (e.status(200)) {
+    // e.preventDefault();
+     alert("Please fill in all fields correctly")
+if (this.state.password === this.state.confirmPassword) { //
   e.preventDefault();
 
   let body = {
@@ -46,18 +52,18 @@ if (this.state.password === this.state.confirmPassword) {
             url: "http://localhost:5000/api/users", 
             data: body 
     })
-    .then(function(response){
-      //debugger;
-      const user = response.data;
-      console.log(user);
-    })
+   
 
     // redirects to sign in page
-    window.location.href="/signin"
+    //window.location.href="/signin"
 
+ 
  } else {
    alert("Passwords do not match.")
- }
+ } 
+} else {
+  alert("Please fill in all fields correctly.")
+}
 }
 
 

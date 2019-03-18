@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom'
-import axios from "axios";
 
 class Header extends Component {
  signOut(){
-    window.location.href = "/signin";
+    window.location.href = "/";
     
     localStorage.clear();
 

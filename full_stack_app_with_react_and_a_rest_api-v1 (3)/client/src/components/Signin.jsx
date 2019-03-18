@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {signUser} from './functions/signUser';
 import {NavLink} from 'react-router-dom'
 import Header from "./Header";
-import axios from "axios";
 
 class Signin extends Component {
 
+  //
     constructor(props){
       super(props);
       this.state = {
@@ -13,16 +12,18 @@ class Signin extends Component {
         password:'',
         user:[]
       }
-      //this.login = this.login.bind(this);
-      this.onChange = this.onChange.bind(this);
+    
+      this.onChange = this.onChange.bind(this); //
     }
 
+    //
     onChange(text){
       this.setState({[text.target.name]: text.target.value})
      // console.log(this.state);
     }
  
 
+    //
 handleSubmit = () =>{
   let body = {"password": this.state.password, "emailAddress": this.state.emailAddress}
 
@@ -30,6 +31,7 @@ handleSubmit = () =>{
 
 }
 
+//
 render() {
   console.log()
     return (

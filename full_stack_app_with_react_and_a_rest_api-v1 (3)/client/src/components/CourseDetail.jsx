@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
 import Header from "./Header";
 import axios from "axios";
-
+import {NavLink} from 'react-router-dom';
 class CourseDetail extends Component {
+  //
     constructor(props) {
         super(props) 
          this.state = {
         course: [], //
         user:[] //
         }
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);//
     }
 
  componentDidMount() {
@@ -28,10 +28,13 @@ const cID= this.props.match.params.id; //
 }
 
 handleDelete() {
+  //
   const localusername = localStorage.getItem('username')
   const localpassword = localStorage.getItem('password')
   
-  const cID= this.props.match.params.id;
+  const cID= this.props.match.params.id;//
+
+  //
   axios({
     method:'DELETE',
     url:`http://localhost:5000/api/courses/${cID}`,
@@ -55,13 +58,13 @@ handleDelete() {
 
      console.log(userData._id)
      console.log(localData[0]._id)
-    if (userData._id === localData[0]._id){
+    if (userData._id === localData[0]._id){ //
         return (
                   <div>
                     <Header/>
                     <div className="actions--bar">
                       <div className="bounds">
-                        <div className="grid-100"><span><a href={`/courses/${cID}/update`} className="button" >Update Course</a><a className="button" onClick={this.handleDelete}>Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
+                        <div className="grid-100"><span><NavLink to={`/courses/${cID}/update`} className="button" >Update Course</NavLink><a className="button" onClick={this.handleDelete}>Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
                       </div>
                     </div>
                    
@@ -108,7 +111,7 @@ handleDelete() {
                   </div>
 
        );
-     } else {
+     } else { //
       return (
         <div>
           <Header/>

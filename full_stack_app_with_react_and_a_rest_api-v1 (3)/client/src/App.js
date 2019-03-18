@@ -17,11 +17,11 @@ import axios from 'axios';
   
 class App extends Component {
 
-  getUser = (body) => {
+  getUser = (body) => { //
 
-    axios({	
+    axios({	//
       method:'GET',
-      url: "http://localhost:5000/api/users", 
+      url: "http://localhost:5000/api/users", // 
       auth:
           {
               username: body.emailAddress,
@@ -33,17 +33,17 @@ class App extends Component {
         const user = response.data;
         console.log(user);
         alert("Welcome " + response.data[0].firstName)
-        localStorage.setItem("user", JSON.stringify(user) );
-        localStorage.setItem("username", body.emailAddress );
-        localStorage.setItem("password", body.password );
-         window.location.href = "/"
+        localStorage.setItem("user", JSON.stringify(user) );//
+        localStorage.setItem("username", body.emailAddress );//
+        localStorage.setItem("password", body.password );//
+         window.location.href = "/"//
       })
       
     }
 
 
     
-  render() {
+  render() { //
     return (
       <BrowserRouter>
         <div>

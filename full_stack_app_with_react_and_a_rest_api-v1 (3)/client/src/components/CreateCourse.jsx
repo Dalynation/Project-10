@@ -6,6 +6,7 @@ import axios from "axios";
 
 class CreateCourse extends Component {
 
+  //
   constructor(props) {
     super(props);
     this.state={
@@ -15,26 +16,13 @@ class CreateCourse extends Component {
       estimatedTime:'',
       materialsNeeded: '',
 
-      // emailAddress:'',
-      // password:''
 
     }
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this);//
 
   }
 
-  // onAuthenticate(){
-  //   const localusername = localStorage.getItem('username')
-  //   const localpassword = localStorage.getItem('password')
-
-  //   this.setState({
-  //     emailAddress:localusername,
-  //     password: localpassword
-  //   })
-   // console.log(this.state);
-  // }
-
-
+    //
     onChange (text) {
       this.setState({ 
         [text.target.name]: text.target.value
@@ -42,13 +30,14 @@ class CreateCourse extends Component {
       
     }
 
+    //
     handleSubmit = () => {
+      if(this.state.title && this.state.description ){//
       const localusername = localStorage.getItem('username')
       const localpassword = localStorage.getItem('password')
       const localuser = localStorage.getItem('user')
        let body = {
-        // "password": localpassword, 
-        // "emailAddress": localusername,
+      
          "user":localuser._id,
          "title":this.state.title,
          "description": this.state.description,
@@ -58,9 +47,9 @@ class CreateCourse extends Component {
        console.log(localusername)
        console.log(localpassword)
 
-     // this.props.makeCourse(body)
+    
 
-        axios({	
+        axios({	//
           method:'POST',
           url: "http://localhost:5000/api/courses", 
           auth:
@@ -75,24 +64,13 @@ class CreateCourse extends Component {
             const user = response.data;
             console.log(user);
             alert(localusername +", your course has been succesfully created")
-            if(response.status === 201){
-              window.location.href = "/"
-            } else if ( response.status === 500){
-             // e.preventDefault()
-            }
             
+              window.location.href = "/"  
           }) 
-    
-        
-
-    //   const course ={
-    //     user: this.state.user,
-    //     title: this.state.title,
-    //     description: this.state.description,
-    //     estimatedTime: this.state.estimatedTime,
-    //     materialsNeeded: this.state.materialsNeeded
-    // }
-
+        } else {
+         alert("A title and description in required.")
+         }
+         
   }
 
 
@@ -117,7 +95,7 @@ class CreateCourse extends Component {
                           </ul>
                         </div>
                       </div>
-                      <form onSubmit = {this.handleSubmit}>
+                      {/* <form onSubmit = {this.handleSubmit}> */}
                         <div className="grid-66">
                           <div className="course--header">
                             <h4 className="course--label">Course</h4>
@@ -167,8 +145,8 @@ class CreateCourse extends Component {
                             </ul>
                           </div>
                         </div>
-                        <div className="grid-100 pad-bottom"><button className="button" type="submit" >Create Course</button><button className="button button-secondary" href="/">Cancel</button></div>
-                      </form>
+                        <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick = {this.handleSubmit} >Create Course</button><button className="button button-secondary" href="/">Cancel</button></div>
+                      {/* </form> */}
                     </div>
                   </div>
                 </div>
