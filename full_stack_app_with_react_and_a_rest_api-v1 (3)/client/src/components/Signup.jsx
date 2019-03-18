@@ -20,7 +20,7 @@ constructor(props) {
 }
 
 
-onChange (text) {
+onChange = (text) => {
   this.setState({ 
     [text.target.name]: text.target.value
    
@@ -29,29 +29,32 @@ onChange (text) {
   
 }
 
-handlesignup = (text) => {
+handlesignup = (e) => {
+if (this.state.password === this.state.confirmPassword) {
+  e.preventDefault();
 
-let body = {
-"firstName":this.state.firstName,
-"lastName":this.state.lastName,
-"emailAddress":this.state.emailAddress,
-"password":this.state.password,
-"confirmpassword":this.state.ConfirmPassword
-}
-   const password = this.state.password
-  const confirmpassword = this.state.ConfirmPassword
+  let body = {
+    "firstName":this.state.firstName,
+    "lastName":this.state.lastName,
+    "emailAddress":this.state.emailAddress,
+    "password":this.state.password,
+    "confirmpassword":this.state.confirmPassword
+  }
+  
+    axios({	
+            method:'POST',
+            url: "http://localhost:5000/api/users", 
+            data: body 
+    })
+    .then(function(response){
+      //debugger;
+      const user = response.data;
+      console.log(user);
+    })
 
- if (password === confirmpassword) {
-  axios({	
-          method:'POST',
-          url: "http://localhost:5000/api/users", 
-          data: body 
-  }).catch()
-  .then(function(response){
-    //debugger;
-    const user = response.data;
-    console.log(user);
-  })
+    // redirects to sign in page
+    window.location.href="/signin"
+
  } else {
    alert("Passwords do not match.")
  }

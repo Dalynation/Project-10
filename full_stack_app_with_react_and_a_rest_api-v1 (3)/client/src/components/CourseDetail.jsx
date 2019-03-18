@@ -46,13 +46,16 @@ handleDelete() {
   
   render () {
     
-     console.log(this.state.course)
-     console.log(this.state.user)
+     
      //
      const cID= this.props.match.params.id;
+     const localData = JSON.parse(localStorage.getItem('user'))
      const courseData = this.state.course;
      const userData = this.state.user;
-    //
+
+     console.log(userData._id)
+     console.log(localData[0]._id)
+    if (userData._id === localData[0]._id){
         return (
                   <div>
                     <Header/>
@@ -105,8 +108,62 @@ handleDelete() {
                   </div>
 
        );
+     } else {
+      return (
+        <div>
+          <Header/>
+          <div className="actions--bar">
+            <div className="bounds">
+              <a className="button button-secondary" href="/">Return to List</a>
+            </div>
+          </div>
          
-    }
+          <div className="bounds course--detail">
+          
+            <div className="grid-66">
+              <div className="course--header">
+                <h4 className="course--label">Course</h4>
+                
+                <h3 className="course--title">
+                 {courseData.title}   
+                </h3>
+                
+                 
+                <p>By {userData.firstName} {userData.lastName}</p> 
+              </div>
+              
+              <div className="course--description">
+              {this.state.course.description}
+              </div>
+            </div>
+          
+            <div className="grid-25 grid-right">
+              <div className="course--stats">
+                <ul className="course--stats--list">
+                  <li className="course--stats--list--item">
+                    <h4>Estimated Time</h4>
+                    <h3>
+                    {courseData.estimatedTime}
+                      </h3>
+                  </li>
+                  <li className="course--stats--list--item">
+                    <h4>Materials Needed</h4>
+                    <ul>
+                    {courseData.materialsNeeded}
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+         
+        </div>
+
+);
+     }
+         
+   }
 
 }
 

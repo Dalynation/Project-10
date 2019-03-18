@@ -75,10 +75,9 @@ class CreateCourse extends Component {
             const user = response.data;
             console.log(user);
             alert(localusername +", your course has been succesfully created")
-            localStorage.setItem("user", JSON.stringify(user) );
-            if(response.status == 201){
+            if(response.status === 201){
               window.location.href = "/"
-            } else if ( response.status == 500){
+            } else if ( response.status === 500){
              // e.preventDefault()
             }
             
@@ -101,7 +100,7 @@ class CreateCourse extends Component {
     
 
     render () {
-
+      const localData = JSON.parse(localStorage.getItem('user'))
         return (
             <div>
               <Header/>
@@ -118,7 +117,7 @@ class CreateCourse extends Component {
                           </ul>
                         </div>
                       </div>
-                      {/* <form onSubmit = {this.handleSubmit}> */}
+                      <form onSubmit = {this.handleSubmit}>
                         <div className="grid-66">
                           <div className="course--header">
                             <h4 className="course--label">Course</h4>
@@ -128,7 +127,7 @@ class CreateCourse extends Component {
                             placeholder="Course title..." 
                             onChange = {this.onChange}
                              /></div>
-                            <p>By Joe Smith</p>
+                            <p>By {localData[0].firstName} {localData[0].lastName}</p>
                           </div>
 
                           <div className="course--description">
@@ -168,8 +167,8 @@ class CreateCourse extends Component {
                             </ul>
                           </div>
                         </div>
-                        <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick = {this.handleSubmit}>Create Course</button><button className="button button-secondary" href="/">Cancel</button></div>
-                      {/* </form> */}
+                        <div className="grid-100 pad-bottom"><button className="button" type="submit" >Create Course</button><button className="button button-secondary" href="/">Cancel</button></div>
+                      </form>
                     </div>
                   </div>
                 </div>

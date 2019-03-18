@@ -41,18 +41,19 @@ handleSubmit = event => {
     estimatedTime: this.state.estimatedTime,
     materialsNeeded: this.state.materialsNeeded
 }
-const cID= this.props.match.params.id;
+  const cID= this.props.match.params.id;
 axios({
-method:'PUT',
-url:`http://localhost:5000/api/courses/${cID}`,
-auth:
-              {
-                  username: `${localusername}`,
-                  password: `${localpassword}`,
-              },
-          data: course
+    method:'PUT',
+    url:`http://localhost:5000/api/courses/${cID}`,
+    auth:
+                  {
+                      username: `${localusername}`,
+                      password: `${localpassword}`,
+                  },
+              data: course
 })
 .then( res => {console.log(res.data)
+  window.location.href=`/courses/${cID}`
   })
 
 }

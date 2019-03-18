@@ -39,14 +39,14 @@ render() {
                 <div className="grid-33 centered signin">
                   <h1>Sign In</h1>
                   <div>
-                    <form>
+                    {/* <form> */}
                       <div><input id="emailAddress" name="emailAddress" type="text"  placeholder="Email Address" onChange = {this.onChange} /></div>
                       <div><input id="password" name="password" type="password"  placeholder="Password" onChange = {this.onChange} /></div>
                       <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick={this.handleSubmit}>Sign In</button><NavLink to="/"><button className="button button-secondary">Cancel</button></NavLink></div>
-                    </form>
+                    {/* </form> */}
                   </div>
                   <p>&nbsp;</p>
-                  <p>Don't have a user account? <a href="sign-up">Click here</a> to sign up!</p>
+                  <p>Don't have a user account? <a href="signup">Click here</a> to sign up!</p>
                 </div>
               </div>
             </div>

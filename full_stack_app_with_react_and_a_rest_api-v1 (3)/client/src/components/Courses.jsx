@@ -43,13 +43,22 @@ constructor(props) {
 
         }
 
-         
+         pleaseSigin(){
+           alert("You must be signed to access and view courses.")
+           window.location.href=("signin")
+         }
+
+         pleaseSigin2(){
+          alert("You must be signed to created a course.")
+          window.location.href=("signin")
+        }
         
 
 
     render () {
  
-
+      const localData = JSON.parse(localStorage.getItem('user'))
+      if (localData){
         return (
           <div>
           <Header/>
@@ -74,6 +83,34 @@ constructor(props) {
             </div>
             </div>
         );
+       } else {
+        return (
+          <div>
+          <Header/>
+            <div className="bounds">
+            
+                  {
+                    this.state.courses.map(course => (
+                      <div key={course._id}>
+                      <div className="grid-33"><div onClick={this.pleaseSigin} className="course--module course--link" >  
+                      <h4 className="course--label">Course</h4>
+                        <h3 className="course--title">{course.title}</h3>
+                      
+                      </div>
+                      </div>
+                      </div>
+                  ))
+                }
+              <div className="grid-33"><a className="course--module course--add--module"  onClick={this.pleaseSigin2}>
+                  <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 13 13" className="add">
+                      <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 " />
+                    </svg>New Course</h3>
+                </a></div>
+            </div>
+            </div>
+            
+        );
+       }
     }
   }
 

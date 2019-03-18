@@ -36,7 +36,7 @@ class App extends Component {
         localStorage.setItem("user", JSON.stringify(user) );
         localStorage.setItem("username", body.emailAddress );
         localStorage.setItem("password", body.password );
-         window.location = "/"
+         window.location.href = "/"
       })
       
     }
