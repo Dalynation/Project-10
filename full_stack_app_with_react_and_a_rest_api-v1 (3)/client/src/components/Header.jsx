@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom'
 
 class Header extends Component {
+  //this function send the user to the signout page and clears the local storage upon arrival. 
  signOut(){
-    window.location.href = "/";
+    window.location.href = "/signout";
     
     localStorage.clear();
 
  }
+ //if the the user is availible in local storage a unique header will appear with the ability to signout 
     render(){
         const localData = JSON.parse(localStorage.getItem('user'))
         if (localData){

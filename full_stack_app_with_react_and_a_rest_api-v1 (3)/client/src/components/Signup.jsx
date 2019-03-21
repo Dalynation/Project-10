@@ -1,86 +1,101 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
+import Header from './Header';
 
 
 class Signup extends Component {
 
-  //
-constructor(props) {
-  super(props)
+  // these are all states required for signup component.
+constructor() {
+  super()
   this.state = {
     firstName:'',
     lastName:'',
     emailAddress:'',
     password:'',
-    confirmPassword:''
+    confirmPassword:'',
   }
 
   this.onChange = this.onChange.bind(this);
 
 }
 
-//
+// function that targets input values for all text field, and help me link values with state.
 onChange = (text) => {
   this.setState({ 
     [text.target.name]: text.target.value
    
   });
-  console.log(JSON.stringify(text.target.password))
-  
 }
 
-//
-handlesignup = (e) => {
-  
-if (e.status(200)) {
-    // e.preventDefault();
-     alert("Please fill in all fields correctly")
-if (this.state.password === this.state.confirmPassword) { //
-  e.preventDefault();
 
-  let body = {
-    "firstName":this.state.firstName,
-    "lastName":this.state.lastName,
-    "emailAddress":this.state.emailAddress,
-    "password":this.state.password,
-    "confirmpassword":this.state.confirmPassword
+  handlesignup = (e) => {
+   // parameters for email validation
+  var reg = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+      //if any fields are left empty, user will be alerted.
+        if(this.state.firstName < 1 || this.state.lastName < 1 || this.state.emailAddress < 1 || this.state.password < 1){
+          e.preventDefault();
+          alert("You need to fill in all fields for firstname, lastname, email address, and password.")
+        } else {
+          
+          // if email does not match up with parmeters then the user will be alerted.
+          if(reg.test(this.state.emailAddress) == false) {
+            alert("Invalid email")
+          } else {
+         // if password and confirmed password matches, the axios post will take place.
+          if (this.state.password === this.state.confirmPassword) { //
+
+            // this is the content that's being posted to the api with axios.
+      let body = {
+        "firstName":this.state.firstName,
+        "lastName":this.state.lastName,
+        "emailAddress":this.state.emailAddress,
+        "password":this.state.password,
+      }
+      
+        axios({	
+                method:'POST',
+                url: "http://localhost:5000/api/users", 
+                data: body 
+                
+        }) .then(response => {
+          if (response.status == 200){
+            alert("Your account has been successfully created")
+            window.location.href="/signin"
+          }
+        })
+        .catch(res => {
+          // if it fails then email already exists, and if not the user will be redirected.
+          if (400) {
+            alert("Email already exists")
+          }else{
+            alert("Your account has been successfully created")
+            window.location.href="/signin"
+          } 
+        }) 
+        
+
+    } else {
+      alert("Passwords do not match.")
+    } 
+
+    }
   }
+
   
-    axios({	
-            method:'POST',
-            url: "http://localhost:5000/api/users", 
-            data: body 
-    })
-   
-
-    // redirects to sign in page
-    //window.location.href="/signin"
-
- 
- } else {
-   alert("Passwords do not match.")
- } 
-} else {
-  alert("Please fill in all fields correctly.")
-}
 }
 
 
 
+//Here is where I render the signup page
 render () {
     return (
   <div>
-        <title>Courses</title>
-        <div id="root">
-          <div>
-            <div className="header">
-              <div className="bounds">
-                <h1 className="header--logo">Courses</h1>
-                <nav><a className="signup" href="sign-up.html">Sign Up</a><a className="signin" href="sign-in">Sign In</a></nav>
-              </div>
-            </div>
-            <hr />
+        
+      
+          <Header/>
+          
             <div className="bounds">
               <div className="grid-33 centered signin">
                 <h1>Sign Up</h1>
@@ -99,8 +114,7 @@ render () {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+       
 
     );
 }

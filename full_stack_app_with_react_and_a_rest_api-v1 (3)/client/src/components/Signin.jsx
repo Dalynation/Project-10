@@ -4,7 +4,7 @@ import Header from "./Header";
 
 class Signin extends Component {
 
-  //
+  //these are the states required to sign in
     constructor(props){
       super(props);
       this.state = {
@@ -12,7 +12,7 @@ class Signin extends Component {
         password:'',
         user:[]
       }
-    
+    // here is where I bind text and its values to its specific state
       this.onChange = this.onChange.bind(this); //
     }
 
@@ -23,7 +23,7 @@ class Signin extends Component {
     }
  
 
-    //
+    //This allows me to use the state to authenticate with the getUser function
 handleSubmit = () =>{
   let body = {"password": this.state.password, "emailAddress": this.state.emailAddress}
 
@@ -31,7 +31,7 @@ handleSubmit = () =>{
 
 }
 
-//
+// here is where I render my sign in page
 render() {
   console.log()
     return (

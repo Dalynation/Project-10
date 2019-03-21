@@ -12,14 +12,15 @@ import CourseDetail from "./components/CourseDetail";
 import CreateCourse from "./components/CreateCourse";
 import UpdateCourse from "./components/UpdateCourse";
 import axios from 'axios';
+import signout from "./components/Signout"
 
  
   
 class App extends Component {
-
-  getUser = (body) => { //
-
-    axios({	//
+// this function authenticates the user with user credentials
+  getUser = (body) => { 
+    // a get request is send to return user data, store that data, while also storing user credentials
+    axios({	
       method:'GET',
       url: "http://localhost:5000/api/users", // 
       auth:
@@ -43,7 +44,7 @@ class App extends Component {
 
 
     
-  render() { //
+  render() { //these are all my route assicated with my react app
     return (
       <BrowserRouter>
         <div>
@@ -51,6 +52,7 @@ class App extends Component {
             <Route exact path = "/" component={Courses} />
             <Route exact path = "/signup" component={Signup} />
             <Route path = "/signin" component={() => <Signin getUser={this.getUser}/>} />
+            <Route exact path = "/signout" component={signout} />
             <Route exact path = "/courses/:id" component={CourseDetail} />
             <Route exact path = "/create-course" component={() => <CreateCourse makeCourse={this.makeCourse}/>} />
             <Route exact path = "/courses/:id/update" component={UpdateCourse} />

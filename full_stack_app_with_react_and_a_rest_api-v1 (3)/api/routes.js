@@ -104,13 +104,13 @@ router.post("/api/users", (req, res, next) => {
     .exec()
     .then(user => {
         if (user.length >= 1) { //if the
-            return res.status(422).json({
+            return res.sendStatus(400).json({
                 message: "This email already exists"
             });
         } else {
                 bcrypt.hash(req.body.password, 10, (err, hash) => { // the password is hashed upon creation
                     if (err) {
-                        return next(err) && res.status(401)
+                        return next(err) && res.res.sendStatus(401)
                         
                     } else {
                     
@@ -123,7 +123,7 @@ router.post("/api/users", (req, res, next) => {
                 user.save() // the user is saved to the database
                 .then(result => {
                     console.log(result)
-                    res.sendStatus(201) //.json({
+                    res.sendStatus(200) //.json({
                  res.location = '/';
                 })
 

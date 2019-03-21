@@ -3,38 +3,40 @@ import Header from "./Header";
 import axios from "axios";
 import {NavLink} from 'react-router-dom';
 class CourseDetail extends Component {
-  //
+
+  //these are the appropiate states to display the correct data
     constructor(props) {
         super(props) 
          this.state = {
-        course: [], //
-        user:[] //
+        course: [], //the course will be store in state
+        user:[] //the user will be store in state
         }
-        this.handleDelete = this.handleDelete.bind(this);//
+        this.handleDelete = this.handleDelete.bind(this);//the delete funtion is binded to my constructor
     }
 
  componentDidMount() {
   //  const {match: {params} } = this.props
-const cID= this.props.match.params.id; //
-  axios.get(`http://localhost:5000/api/courses/${cID}`) //
+const cID= this.props.match.params.id; //this get the id of the spefic course
+  axios.get(`http://localhost:5000/api/courses/${cID}`) //a get request will be sent to the course's unique link
     .then(res => {
-        const courseInfo = res.data; //
+        const courseInfo = res.data; //course data is stored here
         this.setState({
-            course :courseInfo, //
-            user: courseInfo.user //
+            course :courseInfo, 
+            user: courseInfo.user //the user array in the course data is stored her
         })
     })
     
 }
 
+//this function allows me to delete a course
 handleDelete() {
-  //
+  //the username and password from local storage is stored in these varibles
   const localusername = localStorage.getItem('username')
   const localpassword = localStorage.getItem('password')
   
-  const cID= this.props.match.params.id;//
+  const cID= this.props.match.params.id;//specific course id
 
-  //
+  //a delete request is sent then sends the user to the home page
   axios({
     method:'DELETE',
     url:`http://localhost:5000/api/courses/${cID}`,
@@ -50,14 +52,12 @@ handleDelete() {
   render () {
     
      
-     //
+     //Here I am rendering the page for course details
      const cID= this.props.match.params.id;
      const localData = JSON.parse(localStorage.getItem('user'))
      const courseData = this.state.course;
      const userData = this.state.user;
 
-     console.log(userData._id)
-     console.log(localData[0]._id)
     if (userData._id === localData[0]._id){ //
         return (
                   <div>

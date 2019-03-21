@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Header from "./Header";
 import axios from "axios";
+import {NavLink} from 'react-router-dom'
 
 
 
 class CreateCourse extends Component {
 
-  //
+  //these state are whats neccesary for my to create a course
   constructor(props) {
     super(props);
     this.state={
@@ -22,7 +23,7 @@ class CreateCourse extends Component {
 
   }
 
-    //
+    // function that targets input values for all text field, and help me link values with state.
     onChange (text) {
       this.setState({ 
         [text.target.name]: text.target.value
@@ -30,8 +31,9 @@ class CreateCourse extends Component {
       
     }
 
-    //
+    //this function sends a post request to create the course
     handleSubmit = () => {
+      // if the title and description exist then comence axios post
       if(this.state.title && this.state.description ){//
       const localusername = localStorage.getItem('username')
       const localpassword = localStorage.getItem('password')
@@ -58,12 +60,12 @@ class CreateCourse extends Component {
                   password: `${localpassword}`,
               },
           data: body
-          })  
+          })  // once course has been created the user will be directed to the home page
           .then(function(response){
-            //debugger;
+           
             const user = response.data;
             console.log(user);
-            alert(localusername +", your course has been succesfully created")
+            alert("The account" + localusername + " has succesfully created a course")
             
               window.location.href = "/"  
           }) 
@@ -76,7 +78,7 @@ class CreateCourse extends Component {
 
       
     
-
+  //this renders the create course page
     render () {
       const localData = JSON.parse(localStorage.getItem('user'))
         return (
@@ -145,7 +147,7 @@ class CreateCourse extends Component {
                             </ul>
                           </div>
                         </div>
-                        <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick = {this.handleSubmit} >Create Course</button><button className="button button-secondary" href="/">Cancel</button></div>
+                        <div className="grid-100 pad-bottom"><button className="button" type="submit" onClick = {this.handleSubmit} >Create Course</button><NavLink to= "/"><button className="button button-secondary" >Cancel</button></NavLink></div>
                       {/* </form> */}
                     </div>
                   </div>

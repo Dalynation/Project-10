@@ -2,45 +2,50 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import Header from "./Header";
 import axios from "axios";
-
+import ReactMarkdown from 'react-markdown'
 
 class UpdateCourse extends Component {
 
-  //
+  //I require the title and description states to help with validation
   constructor(props) {
     super(props) 
      this.state = {
     course: [], //
+    title:'',
+    description:''
 
     }
 }
 
-//
+// this is where I get course info to display unique course data on the page.
 componentDidMount() {
 const cID= this.props.match.params.id; //
 axios.get(`http://localhost:5000/api/courses/${cID}`) //
 .then(res => {
     const courseInfo = res.data; //
     this.setState({
-        course :courseInfo //
+        course :courseInfo,//
+        title:courseInfo.title,
+        description:courseInfo.description
     })
 });
 }
 //--------------------------------------------------------------
 
-//
+//function for record input values
 handleChange = event => {
   this.setState({ [event.target.name]: event.target.value});
+  console.log(event.target.title)
 }
 
-//
+//this function edits a course
 handleSubmit = event => {
-  if(this.state.title && this.state.description <= 1 ){//
-     event.preventDefualt();
+  //this validates to make sure the title and description isn't empty note:"try backspacing"
+  if(this.state.title <= 2 || this.state.description <= 2 ){//
     alert ("Please do not update course without a title or description.")
-} else {//
+} else {
  
-  
+  // I ame geting the credential to store them in a variable to use it to authenticate to edit the route
   const localusername = localStorage.getItem('username')
   const localpassword = localStorage.getItem('password')
 
@@ -61,6 +66,7 @@ axios({
                   },
               data: course
 })
+// once axios is completed the user will be redirected
 .then( res => {console.log(res.data)
   window.location.href=`/courses/${cID}`
   })
@@ -72,7 +78,7 @@ axios({
     const courseData = this.state.course;
     console.log(courseData)
 
-    
+    // this render my update course page
 return (
     <div>
       <Header/>

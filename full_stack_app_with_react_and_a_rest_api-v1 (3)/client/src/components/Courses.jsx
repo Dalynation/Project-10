@@ -6,7 +6,7 @@ import PrivateRoute from "./PrivateRoute";
 
 class Courses extends Component {
 
-  //
+  //neccesary state to get and store course data
 constructor(props) {
  super(props) 
   this.state = {
@@ -16,11 +16,11 @@ constructor(props) {
   }
 }
 
-//
+// once the component is mounted the a get request will be sent to return course data
       componentDidMount() {
         axios.get('http://localhost:5000/api/courses')
           .then(res =>  {
-            const course = res.data; //
+            const course = res.data; //course data is stored in a course variable
             
             this.setState({
               courses: course,
@@ -30,25 +30,18 @@ constructor(props) {
         }
 
 
-        //
+        //this function sends an alert and redirects the user to the signin page
          pleaseSigin(){
            alert("You must be signed to access and view courses.")
-           window.location.href=("signin")
+           window.location.href=("/signin")
          }
-
-         //
-         pleaseSigin2(){
-          alert("You must be signed to created a course.")
-          window.location.href=("signin")
-        }
-        
 
 
     render () {
  
       const localData = JSON.parse(localStorage.getItem('user')) //
 
-      if (localData){ //
+      if (localData){ //if the user exist in local starage render the regular page mapped for course data else render private route
         return (
           <div>
           <Header/>
