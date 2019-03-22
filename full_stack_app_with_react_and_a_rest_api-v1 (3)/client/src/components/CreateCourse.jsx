@@ -71,7 +71,6 @@ class CreateCourse extends Component {
               window.location.href = "/"  
           }) 
         } else {
-         alert("A title and description in required.")
          this.setState ({
            validation: <div>
            <h2 className="validation--errors--label">Validation errors</h2>
