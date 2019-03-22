@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 class Header extends Component {
   //this function send the user to the signout page and clears the local storage upon arrival. 
  signOut(){
-    window.location.href = "/signout";
+   // window.location.href = "/signout";
     
     localStorage.clear();
 
@@ -22,7 +22,7 @@ class Header extends Component {
             <div className="header">
               <div className="bounds">
                 <h1 className="header--logo">Courses</h1>
-                <nav><a className="signup" href="/">Welcome {localData[0].firstName}</a><a className="signout" onClick= {this.signOut}>Sign Out</a></nav>
+                <nav><a href="http://localhost:3000/" className="signup" >Welcome {localData[0].firstName}</a><a href="/signout" className="signout" onClick= {this.signOut}>Sign Out</a></nav>
               </div>
             </div>
             <hr />

@@ -99,18 +99,25 @@ router.get("/api/users", authenticateUser,  function(req, res){
 
 //POST /users
 // Route for creating users
-router.post("/api/users", (req, res, next) => {
+router.post("/api/users", (req, res, err) => {
     User.find({ emailAddress: req.body.emailAddress }) // searches for the email with in the database
     .exec()
     .then(user => {
         if (user.length >= 1) { //if the
-            return res.sendStatus(400).json({
-                message: "This email already exists"
-            });
+            return res.send(400, 'Email already exists');
+ 
         } else {
+            // if (req.body.password == ""){
+            //     return res.sendStatus(400).json({
+            //         message: "Password reqiured"
+            //     });
+           // } else{
+                if (req.body.firstName == "" || req.body.lastName == "" || req.body.emailAddress == "" || req.body.password == ""){
+                    return res.send(400, "Fields for Firstname, Lastname, Emailaddress and Password are required.")
+                } else{
                 bcrypt.hash(req.body.password, 10, (err, hash) => { // the password is hashed upon creation
                     if (err) {
-                        return next(err) && res.res.sendStatus(401)
+                        return res.sendStatus(400)
                         
                     } else {
                     
@@ -118,19 +125,29 @@ router.post("/api/users", (req, res, next) => {
                         firstName:req.body.firstName,
                         lastName:req.body.lastName,
                         emailAddress: req.body.emailAddress,
-                        password:  hash
-                });
+                        password: hash
+                })
+                   // user.password = bcrypt.hash(user.password)
                 user.save() // the user is saved to the database
                 .then(result => {
                     console.log(result)
                     res.sendStatus(200) //.json({
                  res.location = '/';
                 })
+                .catch(err => {
+                    console.log(err);
+                    res.status(400).json({
+                        error: err
+                    });
+                })
 
             }
         })   
-        }
+      //  }
+    }
+    }
     })
+    
     
     });
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import Header from "./Header";
 import axios from "axios";
-import ReactMarkdown from 'react-markdown'
 
 class UpdateCourse extends Component {
 
@@ -77,7 +76,8 @@ axios({
     const cID= this.props.match.params.id;
     const courseData = this.state.course;
     console.log(courseData)
-
+    const localData = JSON.parse(localStorage.getItem('user'))
+    if (localData) {
     // this render my update course page
 return (
     <div>
@@ -120,6 +120,14 @@ return (
           </div>
         </div>
   );
+} else {
+  return(
+  <div>
+  <Header/>
+  <h2>This route is private</h2>
+  </div>
+  )
+}
 
   }
 

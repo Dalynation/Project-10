@@ -740,9 +740,16 @@ input:focus {
 
 /* styles the validation errors */
 .validation--errors--label {
-  color: #7c689b;
+  color: #9b6868;
   font-size: 28px;
 }
+
+/* styles the signup validation errors */
+.signup--validation--label {
+  color: #e41313;
+  font-size: 16px;
+}
+
 .validation-errors ul {
   color: #7c689b;
   padding: 15px 0 40px 10px;

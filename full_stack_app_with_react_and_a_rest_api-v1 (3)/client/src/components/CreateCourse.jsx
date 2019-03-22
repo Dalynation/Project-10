@@ -16,6 +16,7 @@ class CreateCourse extends Component {
       description:'',
       estimatedTime:'',
       materialsNeeded: '',
+      validation:''
 
 
     }
@@ -65,12 +66,23 @@ class CreateCourse extends Component {
            
             const user = response.data;
             console.log(user);
-            alert("The account" + localusername + " has succesfully created a course")
+            alert("The account " + localusername + " has succesfully created a course")
             
               window.location.href = "/"  
           }) 
         } else {
          alert("A title and description in required.")
+         this.setState ({
+           validation: <div>
+           <h2 className="validation--errors--label">Validation errors</h2>
+           <div className="validation-errors">
+             <ul>
+               <li>Please provide a value for "Title"</li>
+               <li>Please provide a value for "Description"</li>
+             </ul>
+           </div>
+         </div>
+         })
          }
          
   }
@@ -81,6 +93,7 @@ class CreateCourse extends Component {
   //this renders the create course page
     render () {
       const localData = JSON.parse(localStorage.getItem('user'))
+      if (localData) {
         return (
             <div>
               <Header/>
@@ -88,15 +101,7 @@ class CreateCourse extends Component {
                   <div className="bounds course--detail">
                     <h1>Create Course</h1>
                     <div>
-                      <div>
-                        <h2 className="validation--errors--label">Validation errors</h2>
-                        <div className="validation-errors">
-                          <ul>
-                            <li>Please provide a value for "Title"</li>
-                            <li>Please provide a value for "Description"</li>
-                          </ul>
-                        </div>
-                      </div>
+                      {this.state.validation}
                       {/* <form onSubmit = {this.handleSubmit}> */}
                         <div className="grid-66">
                           <div className="course--header">
@@ -153,6 +158,15 @@ class CreateCourse extends Component {
                   </div>
                 </div>
           );
+        } else {
+          return (
+            <div>
+              <Header/>
+              <h2>This route is private</h2>
+              </div>
+             
+          );
+        }
     }
 
 }

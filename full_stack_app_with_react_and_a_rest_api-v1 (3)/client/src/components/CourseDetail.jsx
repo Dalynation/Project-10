@@ -64,7 +64,7 @@ handleDelete() {
                     <Header/>
                     <div className="actions--bar">
                       <div className="bounds">
-                        <div className="grid-100"><span><NavLink to={`/courses/${cID}/update`} className="button" >Update Course</NavLink><a className="button" onClick={this.handleDelete}>Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
+                        <div className="grid-100"><span><NavLink to={`/courses/${cID}/update`} className="button" >Update Course</NavLink><button className="button" onClick={this.handleDelete}>Delete Course</button></span><a className="button button-secondary" href="/">Return to List</a></div>
                       </div>
                     </div>
                    
