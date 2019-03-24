@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom'
 
 class Header extends Component {
   //this function send the user to the signout page and clears the local storage upon arrival. 
