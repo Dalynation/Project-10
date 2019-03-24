@@ -69,6 +69,10 @@ class CreateCourse extends Component {
             alert("The account " + localusername + " has succesfully created a course")
             
               window.location.href = "/"  
+          }) .catch(error => {
+            this.setState({
+             errors: error.response.data.error.message
+           })
           }) 
         } else {
          this.setState ({

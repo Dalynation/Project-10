@@ -14,14 +14,14 @@ class Header extends Component {
         const localData = JSON.parse(localStorage.getItem('user'))
         if (localData){
         return(
-        <div>
-        <NavLink to="/"><title >Courses</title></NavLink>
-        <div id="root">
           <div>
-          <form>
-            <div className="header">
-              <div className="bounds">
-                <h1 className="header--logo">Courses</h1>
+           <title >Courses</title> 
+           <div id="root">
+             <div>
+             <form>
+               <div className="header">
+                 <div className="bounds">
+                 <h1 className="header--logo"><a href='/'>Courses</a></h1>
                 <nav><a href="http://localhost:3000/" className="signup" >Welcome {localData[0].firstName}</a><a href="/signout" className="signout" onClick= {this.signOut}>Sign Out</a></nav>
               </div>
             </div>
@@ -33,13 +33,13 @@ class Header extends Component {
         } else if(!localData) {
             return(
                 <div>
-               <NavLink to="signin"> <title >Courses</title> </NavLink>
+               <title >Courses</title> 
                 <div id="root">
                   <div>
                   <form>
                     <div className="header">
                       <div className="bounds">
-                        <h1 className="header--logo">Courses</h1>
+                      <h1 className="header--logo"><a href='/'>Courses</a></h1>
                         <nav><a className="signup" href="signup">Sign Up</a><a className="signin" href="signin">Sign In</a></nav>
                       </div>
                       

@@ -57,10 +57,11 @@ handlesignup = (e) => {
     })
      .catch(error => {
        this.setState({
-        errors: error.response.data
+        errors: error.response.data.error.message
       })
 
-     console.log(error.response.data)
+     console.log(error.response.data.error.message)
+     console.log(this.state.errors)
 
     })
   } else{
@@ -148,7 +149,8 @@ render () {
                 <h1>Sign Up</h1>
                 <div>
 
-                <h2 className="signup--validation--label" style={{color: 'red'}}>{error}</h2>
+               <h2 className="signup--validation--label" style={{color: 'red'}}>{error}</h2>
+           
                 
 
                 
